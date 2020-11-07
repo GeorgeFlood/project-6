@@ -4,6 +4,7 @@ let startGame = document.querySelector('.btn__reset');
 let keyrow = document.querySelector('#qwerty');
 let missed = 0;
 let tries = document.querySelectorAll('.tries img');
+let button = document.querySelectorAll('button');
 
 // Hides intro overlay.
 startGame.addEventListener('click', () => {
@@ -12,11 +13,11 @@ document.getElementById('overlay').style.display = 'none';
 
 // phrases that the player has to go guess through.
 let phrases = [
-'happy lockdown',
-'alpha only',
-'covid bandit',
-'eminem goat',
-'damnnn javascript',
+'no pressure no diamonds',
+'patients is a super power',
+'happy coding',
+'our time is limited',
+'consistency is key',
 ];
 
 //creating a function to randomize the phrases
@@ -32,7 +33,7 @@ for (let i = 0; i < arr.length; i++){
 	addPhrase.textContent = arr[i];
 	let phraseUL = document.querySelector(`#phrase ul`);
 	phraseUL.appendChild(addPhrase);
-   if (arr[i].textContent === ' '){
+   if (addPhrase.textContent === ' '){
       addPhrase.className = 'space';
    }else{
        addPhrase.className = 'letter';
@@ -44,30 +45,47 @@ const phraseArray = getRandomPhraseAsArray(phrases);
 addPhraseToDisplay(phraseArray); 
 
 function checkLetter(button){
-let letters = document.querySelector('.letter');
+let letters = document.querySelectorAll('li');
 let match = null;
 for (let i = 0; i < letters.length; i++) {
- if(letters[i].textContent === button.textContent){
+ if(letters.textContent === button.textContent){
+    letters[i].className = 'show';
     match = true;
-    letters.textContent = letters[i];
-    letter[i].classList.add('show');
   }
- }
+ };
  return match;
-};
+}
+
+
 
 keyrow.addEventListener('click', (e) => {
     if (e.target.tagName === 'BUTTON') {
-        e.target.classList.add('chosen');
+         checkLetter(e.target);
+        e.target.className = 'chosen';
         e.target.disabled = true;
         let letterFound = checkLetter(event.target);
       if(letterFound !== e.target) {
         tries[missed].src = 'images/lostHeart.png';
-        missed += 1;
+        missed ++;
      }
+    checkWin();
     }
   });
 
-
+function checkWin(){
+let letter = document.getElementsByClassName('letter');
+let show = document.getElementsByClassName('show');
+if(letter.length === show.length){
+  let result = getElementById('overlay').className = 'win';
+  let title = document.getElementsByClassName('title');
+  title.textContent = 'Well done, sir!';
+  result.style.display = 'flex';
+  if (missed >= 4){
+   result.className = 'lose';
+   title.textContent = `That's too bad old chum, av another go!`;
+   result.style.display = 'flex';
+  }
+ }
+};
 
 
