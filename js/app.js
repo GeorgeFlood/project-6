@@ -4,7 +4,7 @@ const startGame = document.querySelector('.btn__reset');
 const keyrow = document.querySelector('#qwerty');
 let missed = 0;
 const tries = document.querySelectorAll('.tries img');
-let button = document.querySelectorAll('BUTTON');
+let button = document.querySelectorAll('ul BUTTON');
 let addPhrase = document.createElement('li');
  let phraseUL = document.querySelector(`#phrase ul`);
 
@@ -68,7 +68,7 @@ if(letter.length <= show.length){
   let result = document.getElementById('overlay');
   let title = document.querySelector('.title');
   result.className = 'win';
-  title.textContent = 'Well done, sir!';
+  title.textContent = 'You must be handsome!';
   result.style.display = 'flex';
  phraseArray;
 } 
@@ -77,7 +77,7 @@ else if (missed >= 5) {
   let result = document.getElementById('overlay');
   let title = document.querySelector('.title');
    result.className = 'lose';
-   title.textContent = `That's too bad old chum, av another go!`;
+   title.textContent = `You know.. Only ugly people get this wrong`;
    result.style.display = 'flex';
   phraseArray;
    }
@@ -106,16 +106,21 @@ missed = 0;
 let hearts = document.querySelectorAll('.tries img');
   for (let i = 0; i < hearts.length; i++) {
     hearts[i].src = 'images/liveHeart.png';
-  };
+  }
+
 keyrow.innerHTML = `
-        <button>q</button><button>w</button><button>e</button><button>r</button><button>t</button><button>y</button><button>u</button><button>i</button><button>o</button><button>p</button>
+             <div id="qwerty" class="section">
+        <div class="keyrow">
+          <button>q</button><button>w</button><button>e</button><button>r</button><button>t</button><button>y</button><button>u</button><button>i</button><button>o</button><button>p</button>
         </div>
         <div class="keyrow">
           <button>a</button><button>s</button><button>d</button><button>f</button><button>g</button><button>h</button><button>j</button><button>k</button><button>l</button>
         </div>
-        <div class="keyrow">s
+        <div class="keyrow">
           <button>z</button><button>x</button><button>c</button><button>v</button><button>b</button><button>n</button><button>m</button>
- `;
+        </div>
+      </div>
+`
 };
 
 
