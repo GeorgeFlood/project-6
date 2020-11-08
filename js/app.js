@@ -4,20 +4,23 @@ const startGame = document.querySelector('.btn__reset');
 const keyrow = document.querySelector('#qwerty');
 let missed = 0;
 const tries = document.querySelectorAll('.tries img');
-const button = document.querySelectorAll('button');
+let button = document.querySelectorAll('BUTTON');
+let addPhrase = document.createElement('li');
+ let phraseUL = document.querySelector(`#phrase ul`);
 
 // Hides intro overlay.
 startGame.addEventListener('click', () => {
 document.getElementById('overlay').style.display = 'none';
+reset();
 });
 
 // phrases that the player has to go guess through.
 let phrases = [
-'no pressure no diamonds',
-'patients is a super power',
-'happy coding',
-'our time is limited',
-'consistency is key',
+'brad pitt',
+'george glooney',
+'chris hemsworth',
+'david beckham',
+'ryan gosling',
 ];
 
 //creating a function to randomize the phrases
@@ -35,7 +38,7 @@ for (let i = 0; i < arr.length; i++){
 	phraseUL.appendChild(addPhrase);
    if (addPhrase.textContent === ' '){
       addPhrase.className = 'space';
-   }else{
+} else{
        addPhrase.className = 'letter';
      }
    }
@@ -56,22 +59,30 @@ for (let i = 0; i < letters.length; i++) {
  return match;
 };
 
+
 const checkWin = () => {
 let letter = document.getElementsByClassName('letter');
 let show = document.getElementsByClassName('show');
-if(letter.length === show.length){
+
+if(letter.length <= show.length){
   let result = document.getElementById('overlay');
-  result.className = 'win';
   let title = document.querySelector('.title');
+  result.className = 'win';
   title.textContent = 'Well done, sir!';
   result.style.display = 'flex';
-if (missed > 4){
+ phraseArray;
+} 
+
+else if (missed >= 5) {
+  let result = document.getElementById('overlay');
+  let title = document.querySelector('.title');
    result.className = 'lose';
    title.textContent = `That's too bad old chum, av another go!`;
    result.style.display = 'flex';
-    }
+  phraseArray;
    }
   };
+
 
 keyrow.addEventListener('click', (e) => {
     if (e.target.tagName === 'BUTTON') {
@@ -83,13 +94,32 @@ keyrow.addEventListener('click', (e) => {
        e.target.style.backgroundColor = 'red';
         missed++;
         tries[missed -1].src = 'images/lostHeart.png';
+      console.log(missed);
       }
      }
      checkWin();
   });
 
 
-console.log(missed);
+const reset = () => {
+missed = 0;
+let hearts = document.querySelectorAll('.tries img');
+  for (let i = 0; i < hearts.length; i++) {
+    hearts[i].src = 'images/liveHeart.png';
+  };
+keyrow.innerHTML = `
+        <button>q</button><button>w</button><button>e</button><button>r</button><button>t</button><button>y</button><button>u</button><button>i</button><button>o</button><button>p</button>
+        </div>
+        <div class="keyrow">
+          <button>a</button><button>s</button><button>d</button><button>f</button><button>g</button><button>h</button><button>j</button><button>k</button><button>l</button>
+        </div>
+        <div class="keyrow">s
+          <button>z</button><button>x</button><button>c</button><button>v</button><button>b</button><button>n</button><button>m</button>
+ `;
+};
+
+
+
 
 
 
