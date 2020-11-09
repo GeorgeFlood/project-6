@@ -10,14 +10,16 @@ let addPhrase = document.createElement('li');
 
 // Hides intro overlay.
 startGame.addEventListener('click', () => {
-document.getElementById('overlay').style.display = 'none';
 reset();
+const phraseArray = getRandomPhraseAsArray(phrases);
+addPhraseToDisplay(phraseArray); 
+document.getElementById('overlay').style.display = 'none';
 });
 
 // phrases that the player has to go guess through.
 let phrases = [
 'brad pitt',
-'george glooney',
+'george clooney',
 'chris hemsworth',
 'david beckham',
 'ryan gosling',
@@ -44,9 +46,6 @@ for (let i = 0; i < arr.length; i++){
    }
 };
 
-const phraseArray = getRandomPhraseAsArray(phrases);
-addPhraseToDisplay(phraseArray); 
-
 const checkLetter = button => {
 let letters = document.querySelectorAll('li');
 let match = null;
@@ -70,7 +69,6 @@ if(letter.length <= show.length){
   result.className = 'win';
   title.textContent = 'You must be handsome!';
   result.style.display = 'flex';
- phraseArray;
 } 
 
 else if (missed >= 5) {
@@ -79,7 +77,6 @@ else if (missed >= 5) {
    result.className = 'lose';
    title.textContent = `You know.. Only ugly people get this wrong`;
    result.style.display = 'flex';
-  phraseArray;
    }
   };
 
@@ -107,7 +104,6 @@ let hearts = document.querySelectorAll('.tries img');
   for (let i = 0; i < hearts.length; i++) {
     hearts[i].src = 'images/liveHeart.png';
   }
-
 keyrow.innerHTML = `
              <div id="qwerty" class="section">
         <div class="keyrow">
@@ -120,7 +116,8 @@ keyrow.innerHTML = `
           <button>z</button><button>x</button><button>c</button><button>v</button><button>b</button><button>n</button><button>m</button>
         </div>
       </div>
-`
+`;
+document.querySelector('#phrase ul').innerHTML = '';
 };
 
 
